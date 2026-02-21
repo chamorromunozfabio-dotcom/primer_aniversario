@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Año ❤️</title>
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+
+<div class="particles" id="particles"></div>
+
+<nav>
+<a href="#inicio">Inicio</a>
+<a href="#fotos">Fotos</a>
+<a href="#videos">Videos</a>
+<a href="#cartas">Cartas</a>
+<a href="#musica">Música</a>
+<a href="#juego">Mini Juego</a>
+<a href="#secreto">Secreto</a>
+<a href="#final">Final</a>
+</nav>
+
+<section id="inicio">
+<h1>Un Año Contigo ❤️</h1>
+<h2 id="contador"></h2>
+<h3 id="frase"></h3>
+</section>
+
+
+<section id="fotos">
+<h1>Nuestros Momentos 📸</h1>
+<div class="card-container" id="fotosContainer"></div>
+</section>
+
+<section id="videos">
+<h1>Videos 🎥</h1>
+<div class="card-container" id="videosContainer"></div>
+</section>
+
+<section id="cartas">
+<h1>Nuestras Cartas 💌</h1>
+
+<div class="envelope-container">
+<div class="envelope" onclick="abrirCarta(this)">
+<div class="letter-content">
+<h3>Carta 1</h3>
+<p>
+Hola, amor:
+No sabes cuánto tiempo estuve pensando en cómo iniciar esta carta, porque no logro encontrar las palabras que abarquen todo lo que siento por ti. Por eso, solo decidí escribir y dejar que mi inspiración fluyera.
+Este domingo cumplimos un año de novios, pero recuerdo el primer día que nos vimos como si fuese ayer. Te veías bonita y resplandeciente, como siempre. Nuestra primera interacción no fue la mejor, pero no sé qué pasó después que solo nos dejamos llevar. Pasaron los días y nos abrimos el uno al otro, siempre entre risas, besos y tiempo juntos. Siempre te escuchaba hablar sobre los temas que te gustaban y se me pasaba el tiempo volando; al terminar el día, siempre quería pasar más tiempo contigo.
+Luego de un tiempo saliendo, decidí hablar con tus papás (estaba muy nervioso), pero me sentí bien al hacerlo, ya que fue la mejor decisión que pude haber tomado.
+Para terminar, solo quiero agradecerte por todos los momentos que hemos compartido. A pesar de las discusiones, problemas y diferencias, siempre me expresaste tu amor sin miedo. Por eso quiero decirte que todo fue, es y será recíproco.
+Te amo
+</p>
+</div>
+</div>
+</div>
+
+<div class="letter">
+<h3>Carta 2</h3>
+<p id="typewriter"></p>
+</div>
+
+</section>
+
+<section id="musica">
+<h1>Nuestra Música 🎶</h1>
+<div id="musicList"></div>
+</section>
+
+<section id="juego">
+<h1>Mini Juego ❤️</h1>
+<div id="game">
+<p id="pregunta"></p>
+<input type="text" id="respuesta">
+<button onclick="verificar()">Responder</button>
+<p id="resultado"></p>
+<p id="amor"></p>
+</div>
+</section>
+
+<section id="secreto">
+<h1>Zona Secreta 🔐</h1>
+
+<p>¿Día en que me escribiste por primera vez?</p>
+<input type="text" id="clave">
+<button onclick="verificarClave()">Descubrir</button>
+
+<div class="secret" id="contenidoSecreto">
+<p>
+A veces me faltan palabras, pero nunca me faltan motivos para elegirte. No solo celebro nuestro primer año, sino el futuro que ya dibujo a tu lado: desde verte caminar hacia el altar hasta construir ese hogar con el que sueño cada día al salir del trabajo. Eres mi presente y mi plan favorito para siempre. Te amo, mi lado luminoso de la vida.
+</p>
+</div>
+</section>
+
+<section id="final">
+<div class="final">
+Siempre serás mi baile inolvidable ❤️
+</div>
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>
