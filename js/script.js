@@ -9,7 +9,8 @@ const fotos = [
 {src:"img/foto8.jpg",desc:"Boda de tu prima (te veías hermosa)",fecha:"Diciembre 2025"},
 {src:"img/foto9.jpg",desc:"Día de tu investidura 🎓",fecha:"8 noviembre 2025"},
 {src:"img/foto10.jpg",desc:"Nosotros ❤️",fecha:"23 noviembre 2025"},
-{src:"img/foto11.jpeg",desc:"Día de tu investidura 🎓",fecha:"8 noviembre 2025"}
+{src:"img/foto11.jpeg",desc:"Día de tu investidura 🎓",fecha:"8 noviembre 2025"},
+{src:"img/foto12.jpg",desc:"Primer Aniversario",fecha:"22 febrero 2026"}
 ];
 
 const fotosContainer = document.getElementById("fotosContainer");
@@ -26,10 +27,12 @@ fotosContainer.appendChild(card);
 });
 
 const videos=[
-{src:"videos/video1.mp4",desc:"San Valentín juntos ❤️"},
-{src:"videos/video2.mp4",desc:"Me viniste a visitar porque estaba enfermo 🤒"},
-{src:"videos/video3.mp4",desc:"Fui a verte jugar fulvito ⚽"},
-{src:"videos/video4.mp4",desc:"Despedida después de día juntos 💔"}
+    {src:"videos/video1.mp4",desc:"San Valentín juntos ❤️"},
+    {src:"videos/video2.mp4",desc:"Me viniste a visitar porque estaba enfermo 🤒"},
+    {src:"videos/video3.mp4",desc:"Fui a verte jugar fulvito ⚽"},
+    {src:"videos/video4.mp4",desc:"Despedida después de día juntos 💔"},
+    {src:"videos/video6.mp4",desc:"Pasadia juntos, Primer aniversario 🏕️"},
+    {src:"videos/video5.mp4",desc:"Resumen Primer aniversario 🎬"}
 ];
 
 const videosContainer=document.getElementById("videosContainer");
@@ -194,3 +197,32 @@ let diff=Math.floor((hoy-inicio)/(1000*60*60*24));
 document.getElementById("contador").innerText=diff+" días desde que comenzó nuestra historia ❤️";
 }
 actualizarContador();
+
+
+// MENSAJE 
+
+function mensajeMujer(){
+document.getElementById("mensajeMujer").innerText=
+"Gracias por permitirme ser el novio y futuro esposo de tan maravillosa mujer. Te amo 🤍";
+}
+
+// ROSAS
+const rosasContainer = document.getElementById("rosas");
+
+for(let i=0;i<30;i++){
+
+let rosa=document.createElement("div");
+
+rosa.classList.add("rosa");
+
+rosa.innerText="🌹";
+
+rosa.style.left=Math.random()*100+"vw";
+
+rosa.style.animationDuration=(5+Math.random()*5)+"s";
+
+rosa.style.fontSize=(20+Math.random()*20)+"px";
+
+rosasContainer.appendChild(rosa);
+
+}
