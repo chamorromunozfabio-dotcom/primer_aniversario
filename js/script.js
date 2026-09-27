@@ -205,17 +205,17 @@
      va a escribir. Ojo: esto es un juego, la respuesta esta en este archivo,
      asi que cualquiera que abra la consola puede leerla. */
   const ACCESO = [
-    "02222024",
-    "22022024",
-    "22/02/2024",
-    "22-02-2024",
-    "22.02.2024",
-    "22 de febrero de 2024",
-    "22 de febrero 2024",
-    "22 febrero 2024",
+    "02222026",
+    "22022026",
+    "22/02/2026",
+    "22-02-2026",
+    "22.02.2026",
+    "22 de febrero de 2026",
+    "22 de febrero 2026",
+    "22 febrero 2026",
     "22 de febrero",
-    "22 feb 2024",
-    "22febrero2024"
+    "22 feb 2026",
+    "22febrero2026"
   ];
 
   const CLAVE_ACCESO = "aniversario-acceso";
