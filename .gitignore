@@ -1,0 +1,13 @@
+# Material de referencia personal: no es parte de la web
+maquina de escribir.txt
+ejemplos de animaciones.txt
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Herramientas
+node_modules/
+package-lock.json
+*.log

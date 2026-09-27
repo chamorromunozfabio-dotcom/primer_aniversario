@@ -1,132 +1,374 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestro Año ❤️</title>
-<link rel="stylesheet" href="css/estilo.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un año contigo 🤍 | Nuestra dedicatoria</title>
+<meta name="description" content="Una dedicatoria de amor: fotos, videos, cartas, música, un mini juego y un secreto. Nuestro primer año juntos.">
+<meta name="author" content="Para ti">
+<meta name="theme-color" content="#140d1c">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Un año contigo 🤍">
+<meta property="og:description" content="Nuestro primer año, en fotos, palabras y canciones.">
+<meta property="og:image" content="img/foto12.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Outfit:wght@300;400;500;600&amp;display=swap">
+<!-- El ?v=2 en el css y el js es para que el navegador no se quede con la
+     version vieja: al abrir el archivo directo (file://) Edge los cachea fuerte. -->
+<link rel="stylesheet" href="css/estilo.css?v=2">
+
+<script>
+  document.documentElement.classList.add('js');
+  /* Se marca aquí, antes de pintar, para que quien ya entró no vea el cartel
+     ni un instante al recargar. */
+  try {
+    if (sessionStorage.getItem('aniversario-acceso') === 'ok') {
+      document.documentElement.classList.add('acceso-listo');
+    }
+  } catch (e) { /* sin storage el cartel simplemente se vuelve a mostrar */ }
+</script>
 </head>
 
 <body>
 
-<div class="particles" id="particles"></div>
+<div class="acceso" id="acceso" role="dialog" aria-modal="true" aria-labelledby="acceso-titulo">
+  <form class="acceso__panel" id="acceso-form" novalidate>
+    <svg class="acceso__icono" aria-hidden="true" focusable="false"><use href="#i-candado"/></svg>
 
-<nav>
-<a href="#inicio">Inicio</a>
-<a href="#fotos">Fotos</a>
-<a href="#videos">Videos</a>
-<a href="#cartas">Cartas</a>
-<a href="#musica">Música</a>
-<a href="#juego">Mini Juego</a>
-<a href="#mujer">Día de la Mujer</a>
-<a href="#secreto">Secreto</a>
-<a href="#final">Final</a>
-</nav>
+    <h2 class="acceso__titulo" id="acceso-titulo">Antes de entrar…</h2>
+    <p class="acceso__texto">
+      <em>Esta dedicatoria es solo para una persona.</em><br>
+      Escribe la fecha en la que empezó nuestro año.
+    </p>
 
-<section id="inicio">
-<h1>Un Año Contigo ❤️</h1>
-<h2 id="contador"></h2>
-<h3 id="frase"></h3>
-</section>
+    <label class="etiqueta" for="acceso-clave">La fecha (mes / día / año)</label>
+    <input class="campo" id="acceso-clave" name="clave" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="00000000" aria-describedby="acceso-estado">
 
+    <button class="boton boton--primario" type="submit">Abrir la dedicatoria</button>
 
-<section id="fotos">
-<h1>Nuestros Momentos 📸</h1>
-<div class="card-container" id="fotosContainer"></div>
-</section>
+    <output class="acceso__estado" id="acceso-estado" for="acceso-clave" aria-live="polite"></output>
 
-<section id="videos">
-<h1>Videos 🎥</h1>
-<div class="card-container" id="videosContainer"></div>
-</section>
-
-<section id="cartas">
-<h1>Nuestras Cartas 💌</h1>
-
-<div class="envelope-container">
-<div class="envelope" onclick="abrirCarta(this)">
-<div class="letter-content">
-<h3>Carta 1</h3>
-<p>
-Hola, amor:
-No sabes cuánto tiempo estuve pensando en cómo iniciar esta carta, porque no logro encontrar las palabras que abarquen todo lo que siento por ti. Por eso, solo decidí escribir y dejar que mi inspiración fluyera.
-Este domingo cumplimos un año de novios, pero recuerdo el primer día que nos vimos como si fuese ayer. Te veías bonita y resplandeciente, como siempre. Nuestra primera interacción no fue la mejor, pero no sé qué pasó después que solo nos dejamos llevar. Pasaron los días y nos abrimos el uno al otro, siempre entre risas, besos y tiempo juntos. Siempre te escuchaba hablar sobre los temas que te gustaban y se me pasaba el tiempo volando; al terminar el día, siempre quería pasar más tiempo contigo.
-Luego de un tiempo saliendo, decidí hablar con tus papás (estaba muy nervioso), pero me sentí bien al hacerlo, ya que fue la mejor decisión que pude haber tomado.
-Para terminar, solo quiero agradecerte por todos los momentos que hemos compartido. A pesar de las discusiones, problemas y diferencias, siempre me expresaste tu amor sin miedo. Por eso quiero decirte que todo fue, es y será recíproco.
-Te amo
-</p>
-</div>
-</div>
+    <button class="acceso__pista" id="acceso-pista" type="button">Necesito una pista</button>
+    <p class="acceso__ayuda" id="acceso-ayuda" hidden>Es el día de nuestro primer aniversario.</p>
+  </form>
 </div>
 
-<div class="letter">
-<h3>Carta 2</h3>
-<p id="typewriter"></p>
-</div>
+<a class="salto" href="#contenido">Saltar al contenido</a>
 
-</section>
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-casa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.5 10.6 12 3.6l8.5 7v9.3a.9.9 0 0 1-.9.9H4.4a.9.9 0 0 1-.9-.9z"/>
+    <path d="M9.4 20.8v-6.2h5.2v6.2"/>
+  </symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.5 5.6A1.6 1.6 0 0 1 5.1 4h13.8a1.6 1.6 0 0 1 1.6 1.6v12.8A1.6 1.6 0 0 1 18.9 20H5.1a1.6 1.6 0 0 1-1.6-1.6z"/>
+    <path d="m3.9 16.4 4.6-4.6 3 3 3.4-3.4 5.2 5.2"/>
+    <path d="M15.4 9.4a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8"/>
+  </symbol>
+  <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2.2"/>
+    <path d="m10.2 9.2 4.6 2.8-4.6 2.8z"/>
+  </symbol>
+  <symbol id="i-carta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.2" y="5.4" width="17.6" height="13.2" rx="2.2"/>
+    <path d="m4.2 7 7.8 5.6L19.8 7"/>
+  </symbol>
+  <symbol id="i-sobre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.4 8.6 12 4.2l8.6 4.4v8.8a1.6 1.6 0 0 1-1.6 1.6H5a1.6 1.6 0 0 1-1.6-1.6z"/>
+    <path d="m3.8 8.8 8.2 5.2 8.2-5.2"/>
+  </symbol>
+  <symbol id="i-musica" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9.2 17.6V6.2l9.6-1.9v11.4"/>
+    <path d="M6.6 17.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2"/>
+    <path d="M16.2 15.7a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2"/>
+  </symbol>
+  <symbol id="i-spotify" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+  </symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7.6 7.4h8.8a4.6 4.6 0 0 1 4.5 3.7l.5 2.5a2.6 2.6 0 0 1-4.6 2.2l-1-1.3H8.2l-1 1.3a2.6 2.6 0 0 1-4.6-2.2l.5-2.5a4.6 4.6 0 0 1 4.5-3.7"/>
+    <path d="M7.6 11.2v2.6M6.3 12.5h2.6"/>
+    <path d="M15.6 11.4h.01M17.6 13.6h.01"/>
+  </symbol>
+  <symbol id="i-flor" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <ellipse cx="12" cy="6.4" rx="2.7" ry="3.4"/>
+    <ellipse cx="12" cy="6.4" rx="2.7" ry="3.4" transform="rotate(72 12 12)"/>
+    <ellipse cx="12" cy="6.4" rx="2.7" ry="3.4" transform="rotate(144 12 12)"/>
+    <ellipse cx="12" cy="6.4" rx="2.7" ry="3.4" transform="rotate(216 12 12)"/>
+    <ellipse cx="12" cy="6.4" rx="2.7" ry="3.4" transform="rotate(288 12 12)"/>
+    <circle cx="12" cy="12" r="1.9" fill="#140d1c"/>
+  </symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4.2" y="10.2" width="15.6" height="10.2" rx="2.4"/>
+    <path d="M7.6 10.2V7.8a4.4 4.4 0 0 1 8.8 0v2.4"/>
+    <path d="M12 14v2.6"/>
+  </symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m12 3.4 1.9 4.9 4.9 1.9-4.9 1.9L12 17l-1.9-4.9L5.2 10.2l4.9-1.9z"/>
+    <path d="m18.6 16.4.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>
+  </symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 4.6v14.2M6.4 13.2 12 18.8l5.6-5.6"/>
+  </symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m9 5.4 7 6.6-7 6.6"/>
+  </symbol>
+  <symbol id="i-relleno" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 21 3.6 12.6A5.6 5.6 0 0 1 11.5 4.7l.5.5.5-.5a5.6 5.6 0 0 1 7.9 7.9z"/>
+  </symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+  </symbol>
+  <symbol id="i-gmail" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+  </symbol>
+</svg>
 
-<section id="musica">
-<h1>Nuestra Música 🎶</h1>
-<div id="musicList"></div>
-</section>
+<canvas class="fondo" id="fondo" aria-hidden="true"></canvas>
 
-<section id="juego">
-<h1>Mini Juego ❤️</h1>
-<div id="game">
-<p id="pregunta"></p>
-<input type="text" id="respuesta">
-<button onclick="verificar()">Responder</button>
-<p id="resultado"></p>
-<p id="amor"></p>
-</div>
-</section>
+<header class="cabecera" id="cabecera">
+  <nav class="menu" aria-label="Secciones de esta dedicatoria">
+    <a class="menu__marca" href="#inicio">
+      <svg class="menu__marca-icono" aria-hidden="true"><use href="#i-relleno"/></svg>
+      <strong>Un año contigo</strong>
+    </a>
 
-<section id="mujer">
-    <h1>Feliz Día de la Mujer 🌹</h1>
-    <div class="mujer-card">
-        <h2>Para la mujer que amo</h2>
-        <br><br>
-        <p>
-            Hoy no solo quiero celebrar el Día de la Mujer, quiero recordarte el amor
-            que siento por ti, sin importar todo lo demas, siempre te amare. <br> <br>
+    <button class="menu__alternador" type="button" aria-expanded="false" aria-controls="lista-menu">
+      <svg class="menu__hamburguesa" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3.5 7h17"/><path d="M3.5 12h17"/><path d="M3.5 17h17"/>
+      </svg>
+      <strong class="u-sr">Mostrar u ocultar el menú</strong>
+    </button>
+  </nav>
 
-            Eres mi fuente de inspiración, alegria y felicidad quiero que te sientas amada
-            a diario, por eso hoy simplemente quiero recordarte lo valiosa que eres, lo mucho
-            que has logrado y conseguido, por eso te pido que sigas dando lucha en tu dia a dia
-            porque se que puedes y nunca te rindes, Te amo mi princesita valiente 🤍. <br><br>
+  <ul class="menu__lista" id="lista-menu">
+    <li class="menu__item" style="--i:#f4a6c0;--j:#e2688f">
+      <a class="menu__enlace" href="#inicio">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-casa"/></svg>
+        <strong class="menu__texto">Inicio</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#e7c27d;--j:#e08a8a">
+      <a class="menu__enlace" href="#fotos">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-foto"/></svg>
+        <strong class="menu__texto">Fotos</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#c9a7f0;--j:#e2688f">
+      <a class="menu__enlace" href="#videos">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-video"/></svg>
+        <strong class="menu__texto">Videos</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#f0d9a0;--j:#d98f6a">
+      <a class="menu__enlace" href="#cartas">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-carta"/></svg>
+        <strong class="menu__texto">Cartas</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#f4a6c0;--j:#c9a7f0">
+      <a class="menu__enlace" href="#musica">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-musica"/></svg>
+        <strong class="menu__texto">Música</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#e2688f;--j:#c9457a">
+      <a class="menu__enlace" href="#juego">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-juego"/></svg>
+        <strong class="menu__texto">Juego</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#f2a3b5;--j:#e7c27d">
+      <a class="menu__enlace" href="#mujer">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-flor"/></svg>
+        <strong class="menu__texto">Día de la Mujer</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#a98fd6;--j:#7a5aa8">
+      <a class="menu__enlace" href="#secreto">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-candado"/></svg>
+        <strong class="menu__texto">Secreto</strong>
+      </a>
+    </li>
+    <li class="menu__item" style="--i:#e7c27d;--j:#e2688f">
+      <a class="menu__enlace" href="#final">
+        <svg class="menu__icono" aria-hidden="true"><use href="#i-estrella"/></svg>
+        <strong class="menu__texto">Final</strong>
+      </a>
+    </li>
+  </ul>
 
-            No solo hoy, sino todos los días, quiero recordarte lo increíble que eres. <br> <br>
+  <progress class="progreso" id="progreso" max="100" value="0" aria-label="Progreso de la lectura"></progress>
+</header>
 
-            ❤️ Feliz Día de la Mujer ❤️<br> <br>
-        </p>
-        <button onclick="mensajeMujer()">Toca aquí ❤️</button>
-        <p id="mensajeMujer"></p>
-    </div>
-    <div class="rosas" id="rosas"></div>
+<main id="contenido">
 
-</section>
+  <section class="seccion seccion--portada" id="inicio" aria-labelledby="titulo-portada">
+    <p class="portada__kicker"><em>Desde el 22 de febrero de 2025</em></p>
+    <h1 class="portada__titulo" id="titulo-portada">Un año <em>contigo</em></h1>
 
-<section id="secreto">
-<h1>Zona Secreta 🔐</h1>
+    <article class="sello" aria-label="Primer aniversario: 22 de febrero">
+      <p class="sello__numero" id="contador">365</p>
+      <p class="sello__leyenda"><strong>días de amor</strong></p>
+      <p class="sello__detalle" id="contador-detalle"></p>
+    </article>
 
-<p>¿Día en que me escribiste por primera vez?</p>
-<input type="text" id="clave">
-<button onclick="verificarClave()">Descubrir</button>
+    <p class="portada__frase">
+      <em id="frase" aria-hidden="true">Amo tu sonrisa</em>
+      <span class="u-sr" id="frases-texto">Frases para ti: Amo tu sonrisa, Me encantan tus ojitos, Siempre amo cuando me abrazas, Amo amarte todo el tiempo, Eres mi princesita preciosa, Siempre contarás conmigo, Me niego a tener un futuro sin ti, Quiero vivir contigo por el resto de mi vida.</span>
+    </p>
 
-<div class="secret" id="contenidoSecreto">
-<p>
-A veces me faltan palabras, pero nunca me faltan motivos para elegirte. No solo celebro nuestro primer año, sino el futuro que ya dibujo a tu lado: desde verte caminar hacia el altar hasta construir ese hogar con el que sueño cada día al salir del trabajo. Eres mi presente y mi plan favorito para siempre. Te amo, mi lado luminoso de la vida.
-</p>
-</div>
-</section>
+    <a class="boton boton--primario" href="#fotos">
+      Ver nuestros recuerdos
+      <svg class="boton__icono" aria-hidden="true"><use href="#i-flecha"/></svg>
+    </a>
+  </section>
 
-<section id="final">
-<div class="final">
-Siempre serás mi baile inolvidable ❤️
-</div>
-</section>
+  <section class="seccion" id="fotos" aria-labelledby="titulo-fotos">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-fotos">Nuestros momentos</h2>
+      <p><em id="fotos-subtitulo">Los recuerdos que guardo siempre</em></p>
+    </header>
+    <ul class="galeria" id="fotosContainer"></ul>
+  </section>
 
-<script src="js/script.js"></script>
+  <section class="seccion" id="videos" aria-labelledby="titulo-videos">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-videos">Videos</h2>
+      <p><em>Lo que no cabe en una foto</em></p>
+    </header>
+    <ul class="galeria galeria--videos" id="videosContainer"></ul>
+  </section>
+
+  <section class="seccion seccion--cartas" id="cartas" aria-labelledby="titulo-cartas">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-cartas">Nuestras cartas</h2>
+      <p><em>Dos palabras que tardé mucho en poder decir</em></p>
+    </header>
+
+    <details class="sobre" name="cartas" id="sobre-1">
+      <summary class="sobre__cierre">
+        <svg class="sobre__icono" aria-hidden="true"><use href="#i-sobre"/></svg>
+        <strong class="sobre__titulo">Carta 1 · Para siempre</strong>
+        <em class="sobre__pista">Abrir el sobre</em>
+        <svg class="sobre__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </summary>
+      <article class="carta">
+        <p class="carta__saludo">Hola, amor:</p>
+        <p>No sabes cuánto tiempo estuve pensando en cómo iniciar esta carta, porque no logro encontrar las palabras que abarquen todo lo que siento por ti. Por eso, solo decidí escribir y dejar que mi inspiración fluyera.</p>
+        <p>Este domingo cumplimos un año de novios, pero recuerdo el primer día que nos vimos como si fuese ayer. Te veías bonita y resplandeciente, como siempre. Nuestra primera interacción no fue la mejor, pero no sé qué pasó después que solo nos dejamos llevar. Pasaron los días y nos abrimos el uno al otro, siempre entre risas, besos y tiempo juntos. Siempre te escuchaba hablar sobre los temas que te gustaban y se me pasaba el tiempo volando; al terminar el día, siempre quería pasar más tiempo contigo.</p>
+        <p>Luego de un tiempo saliendo, decidí hablar con tus papás —estaba muy nervioso—, pero me sentí bien al hacerlo, ya que fue la mejor decisión que pude haber tomado.</p>
+        <p>Para terminar, solo quiero agradecerte por todos los momentos que hemos compartido. A pesar de las discusiones, problemas y diferencias, siempre me expresaste tu amor sin miedo. Por eso quiero decirte que todo fue, es y será recíproco.</p>
+        <p class="carta__firma">Te amo</p>
+      </article>
+    </details>
+
+    <details class="sobre" name="cartas" id="sobre-2">
+      <summary class="sobre__cierre">
+        <svg class="sobre__icono" aria-hidden="true"><use href="#i-sobre"/></svg>
+        <strong class="sobre__titulo">Carta 2 · Para el futuro</strong>
+        <em class="sobre__pista">Abrir el sobre</em>
+        <svg class="sobre__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </summary>
+      <article class="carta">
+        <p class="maquina">Ahora solo quería escribirte algo diferente, algo que puedas conservar y leer para recordar cuánto te amo. Nunca quiero generarte dudas sobre lo que siento por ti; mi deseo es expresarte mi amor de todas las formas posibles. A veces no cuento con mucho tiempo, pero no dudes de que quiero terminar todo lo que tengo pendiente para empezar nuestro futuro juntos.</p>
+        <p class="maquina">Estoy ansioso porque llegue el momento en que te vea caminar hacia el altar y sentirme más que realizado. Ver cómo crecen nuestros hijos, regresar a casa después del trabajo y saber que tú estás ahí esperándome son cosas que pienso a diario y que quiero cumplir, pero solo contigo.</p>
+        <p class="maquina">No sé qué será de mi vida el día de mañana, pero tengo claro que quiero que estés en ella. Te amo infinitamente, mi lado luminoso de la vida.</p>
+      </article>
+    </details>
+  </section>
+
+  <section class="seccion" id="musica" aria-labelledby="titulo-musica">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-musica">Nuestra música</h2>
+      <p><em>Canciones que suenan a nosotros</em></p>
+    </header>
+    <ul class="pistas" id="musicList"></ul>
+    <p class="pistas__aviso">Los reproductores vienen de Spotify, así que necesitas internet para escucharlas aquí.</p>
+  </section>
+
+  <section class="seccion" id="juego" aria-labelledby="titulo-juego">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-juego">Mini juego</h2>
+      <p><em>Responde de memoria y mira cuánto amor queda</em></p>
+    </header>
+
+    <form class="juego" id="game" novalidate>
+      <p class="u-sr" id="juego-ayuda">Responde las tres preguntas. Cada respuesta incorrecta resta amor, pero nunca hay límites contigo.</p>
+      <p class="juego__pregunta" id="pregunta"></p>
+
+      <label class="etiqueta" for="respuesta">Tu respuesta</label>
+      <input class="campo" id="respuesta" name="respuesta" type="text" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-describedby="juego-ayuda" placeholder="Escribe aquí…">
+
+      <button class="boton boton--primario" type="submit">Responder</button>
+
+      <output class="juego__resultado" id="resultado" for="respuesta" aria-live="polite"></output>
+
+      <div class="medidor">
+        <label class="etiqueta" for="amor">Amor</label>
+        <meter class="medidor__barra" id="amor" min="0" max="100" value="100" aria-describedby="amor-valor"></meter>
+        <output class="medidor__valor" id="amor-valor" for="amor">100%</output>
+      </div>
+    </form>
+  </section>
+
+  <section class="seccion seccion--mujer" id="mujer" aria-labelledby="titulo-mujer">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-mujer">Feliz Día de la Mujer</h2>
+      <p><em>Para la mujer que amo</em></p>
+    </header>
+
+    <article class="dedicatoria">
+      <p>Hoy no solo quiero celebrar el Día de la Mujer, quiero recordarte el amor que siento por ti, sin importar todo lo demás. Siempre te amaré.</p>
+      <p>Eres mi fuente de inspiración, alegría y felicidad. Quiero que te sientas amada a diario, por eso hoy simplemente quiero recordarte lo valiosa que eres, lo mucho que has logrado y conseguido. Por eso te pido que sigas dando lucha en tu día a día, porque sé que puedes y nunca te rindes. Te amo, mi princesita valiente 🤍.</p>
+      <p>No solo hoy, sino todos los días, quiero recordarte lo increíble que eres.</p>
+      <p class="dedicatoria__brindis">🤍 Feliz Día de la Mujer 🤍</p>
+
+      <button class="boton boton--oro" type="button" id="boton-mujer">Toca aquí 🤍</button>
+      <output class="dedicatoria__mensaje" id="mensajeMujer" aria-live="polite"></output>
+    </article>
+  </section>
+
+  <section class="seccion" id="secreto" aria-labelledby="titulo-secreto">
+    <header class="seccion__encabezado">
+      <h2 id="titulo-secreto">Zona secreta</h2>
+      <p><em>Solo si de verdad me conoces</em></p>
+    </header>
+
+    <form class="secreto" id="formulario-secreto" novalidate>
+      <label class="etiqueta" for="clave">¿En qué día me escribiste por primera vez? (día / mes / año)</label>
+      <input class="campo" id="clave" name="clave" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Adivina">
+      <button class="boton boton--primario" type="submit">Descubrir</button>
+      <p class="u-sr" id="secreto-estado" role="status"></p>
+    </form>
+
+    <article class="secreto__carta" id="contenidoSecreto" hidden>
+      <h3>Lo que nunca te dije</h3>
+      <p>A veces me faltan palabras, pero nunca me faltan motivos para elegirte. No solo celebro nuestro primer año, sino el futuro que ya dibujo a tu lado: desde verte caminar hacia el altar hasta construir ese hogar con el que sueño cada día al salir del trabajo. Eres mi presente y mi plan favorito para siempre. Te amo, mi lado luminoso de la vida.</p>
+    </article>
+  </section>
+
+  <section class="seccion seccion--final" id="final" aria-labelledby="titulo-final">
+    <h2 class="final" id="titulo-final">Siempre serás mi <em>baile inolvidable</em> 🤍</h2>
+    <a class="boton boton--suave" href="#inicio">Volver al inicio</a>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <nav class="redes" aria-label="Nuestras redes sociales">
+    <ul class="redes__lista" id="redes-lista"></ul>
+  </nav>
+  <p class="pie__texto">Hecho con amor para <em>nosotros dos</em> · 22 de febrero</p>
+</footer>
+
+<!-- El ?v=2 es para que el navegador no se quede con la version vieja del
+     script: al abrir el archivo directo (file://) Edge lo cachea fuerte. -->
+<script src="js/script.js?v=2"></script>
 </body>
 </html>
