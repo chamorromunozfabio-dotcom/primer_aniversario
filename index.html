@@ -15,6 +15,19 @@
 <meta property="og:image" content="img/foto12.jpg">
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+
+<!-- Para poder instalarla como app en el celular (PWA). El manifest es el que
+     le dice al teléfono el nombre, el color y el ícono de la app. Se llama
+     manifest.json y no .webmanifest a propósito: cualquier servidor sabe que
+     .json es JSON, y el navegador exige que el manifest llegue como tal. -->
+<link rel="manifest" href="manifest.json">
+<!-- iPhone no usa el manifest para el ícono de la pantalla de inicio: usa este. -->
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Un año">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Outfit:wght@300;400;500;600&amp;display=swap">

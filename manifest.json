@@ -1,0 +1,51 @@
+{
+  "id": "./",
+  "name": "Un año contigo",
+  "short_name": "Un año",
+  "description": "Nuestra dedicatoria: fotos, videos, cartas, música, un mini juego y un secreto.",
+  "lang": "es",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "theme_color": "#140d1c",
+  "background_color": "#140d1c",
+  "categories": ["lifestyle", "personalization"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "img/icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icono-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuestras cartas",
+      "short_name": "Cartas",
+      "url": "./#cartas",
+      "icons": [{ "src": "img/icono-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Nuestros momentos",
+      "short_name": "Fotos",
+      "url": "./#fotos",
+      "icons": [{ "src": "img/icono-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

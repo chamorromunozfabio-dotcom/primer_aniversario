@@ -1122,7 +1122,32 @@
   }
 
   /* ==========================================================
-     13. Acceso
+     13. Instalación como app (PWA)
+     ========================================================== */
+  /* El service worker es lo que guarda la página en el celular para que abra
+     al instante y siga funcionando sin internet. Sin él, el navegador no
+     ofrece instalarla, aunque el manifest esté todo bien.
+
+     sw.js está en la raíz del sitio (y no en js/) porque un service worker
+     solo puede controlar su propia carpeta: desde js/ no llegaría al
+     index.html. La ruta y el scope son relativas para que funcione igual en
+     la raíz de un dominio o en una subcarpeta, como en GitHub Pages.
+
+     Ojo: solo funciona en https:// o en localhost. Abierto como archivo
+     (file://) no hay service worker, y por eso todo esto va envuelto en un
+     try/catch: así, abriendo el index.html directo, no se ve ningún error. */
+  function initPWA() {
+    if (!("serviceWorker" in navigator)) return;
+
+    try {
+      navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(() => {});
+    } catch (e) {
+      /* sin service worker la página sigue funcionando igual */
+    }
+  }
+
+  /* ==========================================================
+     14. Acceso
      ========================================================== */
   /* Acepta la respuesta con o sin espacios y con acentos de más o de menos,
      para que dé igual si escribe 22022026, 22/02/2026 o "22 de febrero". */
@@ -1208,7 +1233,7 @@
   }
 
   /* ==========================================================
-     14. Arranque
+     15. Arranque
      ========================================================== */
   function init() {
     pintarFotos();
@@ -1227,6 +1252,7 @@
     initMujer();
     initProgreso();
     initAcceso();
+    initPWA();
     fondo.init();
   }
 
