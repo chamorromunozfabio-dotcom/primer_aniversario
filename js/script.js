@@ -393,6 +393,10 @@
     return { init, saltar };
   })();
 
+  /* Los minijuegos (js/juegos.js) sueltan sus corazones con el mismo fondo
+     animado, así que se lo deja a mano en vez de duplicar las partículas. */
+  window.fondo = fondo;
+
   /* ==========================================================
      4. Render de galerías con la API del DOM
      ========================================================== */

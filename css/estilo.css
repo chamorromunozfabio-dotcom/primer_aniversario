@@ -1377,6 +1377,488 @@
     font-weight: 600;
   }
 
+  /* ---------- JUEGOS ---------- */
+  /* El tablero: una tarjeta por minijuego. Las pinned por el JS con --i y --j,
+     así cada una tiene su propio degradado sin tener que escribir seis
+     clases distintas. */
+  .juegos__intro {
+    max-width: 40rem;
+    margin: 0 auto var(--hueco);
+    color: var(--humo);
+    text-align: center;
+  }
+
+  .juegos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: clamp(0.9rem, 2vw, 1.4rem);
+    margin: 0 0 var(--hueco);
+    padding: 0;
+    list-style: none;
+  }
+
+  .juego-tarjeta {
+    display: flex;
+  }
+
+  .juego-tarjeta__boton {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 1.4rem 1.3rem 1.2rem;
+    overflow: hidden;
+    background: var(--degradado-panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-l);
+    box-shadow: var(--luz-panel);
+    font: inherit;
+    color: var(--crema);
+    text-align: left;
+    cursor: pointer;
+    transition: transform var(--transicion), box-shadow var(--transicion), border-color var(--transicion);
+  }
+
+  /* El brillo de cada tarjeta crece al pasar por encima, con los dos colores
+     que le puso el JS. */
+  .juego-tarjeta__boton::before {
+    content: "";
+    position: absolute;
+    inset: -40% -60% auto -60%;
+    height: 130%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--i) 34%, transparent), transparent 72%);
+    opacity: 0.55;
+    transition: opacity var(--transicion);
+    pointer-events: none;
+  }
+
+  .juego-tarjeta__boton > * {
+    position: relative;
+  }
+
+  .juego-tarjeta__boton:hover,
+  .juego-tarjeta__boton:focus-visible {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--i) 55%, transparent);
+    box-shadow: var(--luz-rosa), var(--luz-panel);
+  }
+
+  .juego-tarjeta__boton:hover::before {
+    opacity: 1;
+  }
+
+  .juego-tarjeta__icono {
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    background: linear-gradient(140deg, var(--i), var(--j));
+    border-radius: var(--radio);
+    color: var(--noche);
+  }
+
+  .juego-tarjeta__glifo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .juego-tarjeta__titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.42rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .juego-tarjeta__resumen {
+    color: var(--humo);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .juego-tarjeta__jugar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.6rem;
+    color: var(--rosa);
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .juego-tarjeta__flecha {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transicion);
+  }
+
+  .juego-tarjeta__boton:hover .juego-tarjeta__flecha {
+    transform: translateY(3px);
+  }
+
+  /* El cartelito con las reglas, para no dejar dudas sobre los dos modos. */
+  .juegos__ayuda {
+    max-width: 46rem;
+    margin: 0 auto var(--hueco);
+    padding: 1.2rem 1.4rem;
+    background: color-mix(in srgb, var(--ciruela) 55%, transparent);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio);
+  }
+
+  .juegos__ayuda-titulo {
+    margin: 0 0 0.6rem;
+    color: var(--oro);
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .juegos__ayuda-lista {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--humo);
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  .juegos__ayuda-lista strong {
+    color: var(--crema);
+  }
+
+  /* El quiz viejo queda abajo de los seis, con su propio título para que no
+     se confunda con el tablero. */
+  .quiz {
+    margin-top: calc(var(--hueco) * 1.6);
+    padding-top: var(--hueco);
+    border-top: 1px solid var(--borde-suave);
+  }
+
+  .quiz__titulo {
+    margin: 0;
+    font-family: var(--fuente-titulo);
+    font-size: var(--paso-2);
+    text-align: center;
+  }
+
+  .quiz__intro {
+    margin: 0.2rem 0 1.6rem;
+    color: var(--humo);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* ---------- EL POPUP DEL JUEGO ---------- */
+  .modal {
+    width: min(52rem, calc(100vw - 1.5rem));
+    max-width: none;
+    max-height: calc(100vh - 1.5rem);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+  }
+
+  .modal::backdrop {
+    background: color-mix(in srgb, var(--noche) 82%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  .modal[open] {
+    animation: aparecer-modal 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .modal__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    max-height: calc(100vh - 1.5rem);
+    padding: clamp(1.3rem, 3vw, 2.2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--degradado-panel);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-l);
+    box-shadow: var(--luz-rosa), var(--luz-panel);
+    text-align: center;
+  }
+
+  .modal__cerrar {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: color-mix(in srgb, var(--crema) 10%, transparent);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio-full);
+    color: var(--humo);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color var(--transicion), background var(--transicion);
+  }
+
+  .modal__cerrar:hover {
+    background: color-mix(in srgb, var(--rosa) 22%, transparent);
+    color: var(--crema);
+  }
+
+  .modal__sobretitulo {
+    margin: 0;
+    color: var(--oro);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .modal__titulo {
+    margin: 0;
+    font-family: var(--fuente-titulo);
+    font-size: var(--paso-3);
+    line-height: 1.15;
+  }
+
+  .modal__resumen,
+  .modal__lema,
+  .modal__pie {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--humo);
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+
+  .modal__pie {
+    font-size: 0.85rem;
+    color: var(--humo-tenue);
+  }
+
+  .modal__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  /* Las dos opciones de modo, con las caritas de los personajes. */
+  .modo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.9rem;
+    width: 100%;
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  .modo__opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1.2rem 1rem;
+    background: color-mix(in srgb, var(--ciruela-alta) 70%, transparent);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    color: var(--crema);
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+    transition: transform var(--transicion), border-color var(--transicion), background var(--transicion);
+  }
+
+  .modo__opcion:hover,
+  .modo__opcion:focus-visible {
+    transform: translateY(-3px);
+    background: color-mix(in srgb, var(--rosa) 14%, transparent);
+    border-color: color-mix(in srgb, var(--rosa) 50%, transparent);
+  }
+
+  .modo__caras {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  /* Los personajes vienen como data-URL de js/sprites.js: hay que
+     desactivarle el suavizado para que sigan siendo píxeles. */
+  .modo__cara,
+  .marcador__cara,
+  .podio__cara {
+    width: 2.4rem;
+    height: auto;
+    image-rendering: pixelated;
+  }
+
+  .modo__nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 1.25rem;
+  }
+
+  .modo__teclas {
+    color: var(--rosa);
+    font-size: 0.86rem;
+  }
+
+  .modo__nota {
+    color: var(--humo-tenue);
+    font-size: 0.78rem;
+  }
+
+  /* ---------- EL TABLERO ---------- */
+  .marcador {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: color-mix(in srgb, var(--noche) 45%, transparent);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio);
+  }
+
+  .marcador__lado {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .marcador__lado--derecha {
+    justify-content: flex-end;
+  }
+
+  .marcador__nombre {
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .marcador__puntos {
+    font-size: 1.3rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--rosa);
+  }
+
+  .marcador__medio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .marcador__reloj {
+    font-family: var(--fuente-titulo);
+    font-size: 1.7rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .marcador__reloj--poco {
+    color: var(--rosa-fuerte);
+    animation: latir 900ms ease-in-out infinite;
+  }
+
+  .marcador__unidad {
+    color: var(--humo-tenue);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .juego__escenario {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--noche);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio);
+  }
+
+  /* El canvas es de 640x320 y se estira con ratios enteros hasta donde
+     entre. El alto fijo sale del ancho para que nunca se corte. */
+  .lienzo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    border-radius: var(--radio-s);
+    touch-action: manipulation;
+  }
+
+  .juego__aviso {
+    min-height: 1.4em;
+    margin: 0;
+    color: var(--oro);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .juego__barra {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* ---------- EL PODIO ---------- */
+  .podio {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(0.8rem, 3vw, 2rem);
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+
+  .podio__peldano {
+    display: flex;
+    flex: 0 1 12rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    padding: 1.2rem 0.8rem 1rem;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--lila) 22%, transparent), transparent);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio) var(--radio) 0 0;
+    animation: subir 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .podio__peldano--primero {
+    flex-basis: 14rem;
+    padding-top: 1.9rem;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--oro) 26%, transparent), transparent);
+    border-color: color-mix(in srgb, var(--oro) 45%, transparent);
+    animation-delay: 120ms;
+  }
+
+  .podio__lugar {
+    color: var(--oro);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .podio__cara {
+    width: 3.2rem;
+    margin: 0.2rem 0;
+  }
+
+  .podio__nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+  }
+
+  .podio__puntos {
+    color: var(--humo);
+    font-size: 0.86rem;
+  }
+
   /* ---------- DEDICATORIA ---------- */
   .dedicatoria {
     display: flex;
@@ -1673,6 +2155,32 @@
     }
   }
 
+  /* El popup del juego entra desde abajo, un poco más marcado que el
+     aparecer de los textos. */
+  @keyframes aparecer-modal {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Los peldaños del podio suben de a uno, así que el segundo lugar entra
+     primero. */
+  @keyframes subir {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes revelar {
     from {
       opacity: 0;
@@ -1962,6 +2470,35 @@
     .sello {
       padding: 1.3rem 1.6rem;
     }
+
+    /* En el celu el popup casi no tiene alto, así que el tablero se achica
+       un poco y todo lo demás se apila. */
+    .modal__panel {
+      padding: 1.1rem 0.9rem 1.3rem;
+    }
+
+    .marcador {
+      gap: 0.4rem;
+      padding: 0.5rem 0.7rem;
+    }
+
+    .marcador__cara {
+      display: none;
+    }
+
+    .modo {
+      grid-template-columns: 1fr;
+    }
+
+    .podio__peldano {
+      flex-basis: auto;
+      padding-top: 1rem;
+    }
+
+    .podio__peldano--primero {
+      flex-basis: auto;
+      padding-top: 1.4rem;
+    }
   }
 
   @media (hover: none) {
@@ -1991,3 +2528,16 @@
     }
   }
 }
+
+body.jugando { overflow: hidden; }
+.modal--juego, .modal--podio { width: 100vw; max-width: 100vw; height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh; margin: 0; padding: 0; }
+.modal--juego .modal__panel--juego, .modal--podio .modal__panel--podio { width: 100%; min-height: 100vh; min-height: 100dvh; max-height: 100vh; max-height: 100dvh; border-radius: 0; border-left: 0; border-right: 0; justify-content: flex-start; gap: 0.6rem; }
+.modal--juego .juego__escenario { flex: 1 1 auto; width: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.modal--juego .lienzo { width: min(100%, calc((100dvh - 19rem) * 2)); height: auto; margin-inline: auto; }
+.modal--juego .marcador { width: min(100%, 60rem); }
+.modal--juego .juego__aviso { width: min(100%, 60rem); }
+.turno-indicador { position: absolute; display: flex; align-items: center; gap: 0.25rem; pointer-events: none; transition: transform .25s ease; z-index: 10; }
+.turno-indicador__flecha { font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1; filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+.turno-indicador__nombre { font-size: clamp(.75rem, 2vw, .95rem); font-weight: 600; color: var(--humo); text-shadow: 0 2px 8px rgba(0,0,0,.5); padding: .125rem .375rem; border-radius: .5rem; background: rgba(20,13,28,.5); backdrop-filter: blur(4px); }
+.juego__escenario { position: relative; }
+@media screen and (orientation: portrait) and (max-width: 1024px) { .modal--juego .juego__escenario::before { content: 'Gira el celular a horizontal para jugar mejor'; display: block; position: absolute; top: 0.4rem; left: 50%; transform: translateX(-50%); padding: 0.35rem 0.8rem; border-radius: 999px; background: rgba(20,13,28,.75); color: var(--humo); font-size: 0.8rem; font-weight: 600; z-index: 20; pointer-events: none; white-space: nowrap; } }

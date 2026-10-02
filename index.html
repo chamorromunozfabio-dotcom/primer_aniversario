@@ -31,9 +31,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Outfit:wght@300;400;500;600&amp;display=swap">
-<!-- El ?v=2 en el css y el js es para que el navegador no se quede con la
+<!-- El ?v=3 en el css y el js es para que el navegador no se quede con la
      version vieja: al abrir el archivo directo (file://) Edge los cachea fuerte. -->
-<link rel="stylesheet" href="css/estilo.css?v=2">
+<link rel="stylesheet" href="css/estilo.css?v=3">
 
 <script>
   document.documentElement.classList.add('js');
@@ -191,9 +191,9 @@
       </a>
     </li>
     <li class="menu__item" style="--i:#e2688f;--j:#c9457a">
-      <a class="menu__enlace" href="#juego">
+      <a class="menu__enlace" href="#juegos">
         <svg class="menu__icono" aria-hidden="true"><use href="#i-juego"/></svg>
-        <strong class="menu__texto">Juego</strong>
+        <strong class="menu__texto">Juegos</strong>
       </a>
     </li>
     <li class="menu__item" style="--i:#f2a3b5;--j:#e7c27d">
@@ -305,29 +305,48 @@
     <p class="pistas__aviso">Los reproductores vienen de Spotify, así que necesitas internet para escucharlas aquí.</p>
   </section>
 
-  <section class="seccion" id="juego" aria-labelledby="titulo-juego">
+  <section class="seccion seccion--juegos" id="juegos" aria-labelledby="titulo-juegos">
     <header class="seccion__encabezado">
-      <h2 id="titulo-juego">Mini juego</h2>
-      <p><em>Responde de memoria y mira cuánto amor queda</em></p>
+      <h2 id="titulo-juegos">Juegos</h2>
+      <p><em>Seis minijuegos para jugar de a dos o contra la computadora</em></p>
     </header>
 
-    <form class="juego" id="game" novalidate>
-      <p class="u-sr" id="juego-ayuda">Responde las tres preguntas. Cada respuesta incorrecta resta amor, pero nunca hay límites contigo.</p>
-      <p class="juego__pregunta" id="pregunta"></p>
+    <p class="juegos__intro">Elegí uno, decidí con quién lo jugás y sumen puntos. Acá no hay vidas: lo que se pierde es el tiempo, nunca la parte.</p>
 
-      <label class="etiqueta" for="respuesta">Tu respuesta</label>
-      <input class="campo" id="respuesta" name="respuesta" type="text" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-describedby="juego-ayuda" placeholder="Escribe aquí…">
+    <ul class="juegos-lista" id="juegos-lista"></ul>
 
-      <button class="boton boton--primario" type="submit">Responder</button>
+    <div class="juegos__ayuda">
+      <p class="juegos__ayuda-titulo">Cómo se juega</p>
+      <ul class="juegos__ayuda-lista">
+        <li><strong>En pareja</strong> los dos juegan en el mismo teclado, cada uno con su mitad: uno con las letras y el otro con las flechas.</li>
+        <li><strong>En solitario</strong> vos usás el teclado y Ella juega sola. No siempre juega bien, así que se la puede ganar.</li>
+        <li>Cada juego dura entre 60 y 120 segundos. Gana quien más puntos juntó y al final se anuncia el podio.</li>
+        <li>Con el celu se juega tocando el tablero. El botón 🔊 apaga la música.</li>
+      </ul>
+    </div>
 
-      <output class="juego__resultado" id="resultado" for="respuesta" aria-live="polite"></output>
+    <div class="quiz">
+      <h3 class="quiz__titulo">El quiz de los recuerdos</h3>
+      <p class="quiz__intro"><em>Responde de memoria y mira cuánto amor queda</em></p>
 
-      <div class="medidor">
-        <label class="etiqueta" for="amor">Amor</label>
-        <meter class="medidor__barra" id="amor" min="0" max="100" value="100" aria-describedby="amor-valor"></meter>
-        <output class="medidor__valor" id="amor-valor" for="amor">100%</output>
-      </div>
-    </form>
+      <form class="juego" id="game" novalidate>
+        <p class="u-sr" id="juego-ayuda">Responde las tres preguntas. Cada respuesta incorrecta resta amor, pero nunca hay límites contigo.</p>
+        <p class="juego__pregunta" id="pregunta"></p>
+
+        <label class="etiqueta" for="respuesta">Tu respuesta</label>
+        <input class="campo" id="respuesta" name="respuesta" type="text" autocomplete="off" spellcheck="false" enterkeyhint="go" aria-describedby="juego-ayuda" placeholder="Escribe aquí…">
+
+        <button class="boton boton--primario" type="submit">Responder</button>
+
+        <output class="juego__resultado" id="resultado" for="respuesta" aria-live="polite"></output>
+
+        <div class="medidor">
+          <label class="etiqueta" for="amor">Amor</label>
+          <meter class="medidor__barra" id="amor" min="0" max="100" value="100" aria-describedby="amor-valor"></meter>
+          <output class="medidor__valor" id="amor-valor" for="amor">100%</output>
+        </div>
+      </form>
+    </div>
   </section>
 
   <section class="seccion seccion--mujer" id="mujer" aria-labelledby="titulo-mujer">
@@ -380,8 +399,18 @@
   <p class="pie__texto">Hecho con amor para <em>nosotros dos</em> · 22 de febrero</p>
 </footer>
 
-<!-- El ?v=2 es para que el navegador no se quede con la version vieja del
+<!-- Los minijuegos. El orden importa: sprites dibuja a los dos personajes,
+     audio arma el sonido, juegos.js pinta las tarjetas y da de alta el que se
+     está jugando, y juegos-lista.js registra los seis al final. El ?v= es para
+     que el navegador no se quede con una versión vieja al abrir el archivo
+     directo (file://), que es donde más cachea. -->
+<script src="js/sprites.js?v=1"></script>
+<script src="js/audio.js?v=1"></script>
+<script src="js/juegos.js?v=1"></script>
+<script src="js/juegos-lista.js?v=1"></script>
+
+<!-- El ?v=3 es para que el navegador no se quede con la version vieja del
      script: al abrir el archivo directo (file://) Edge lo cachea fuerte. -->
-<script src="js/script.js?v=2"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>

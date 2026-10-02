@@ -16,7 +16,7 @@
    estuviera en js/, no podría abarcar la página principal, y para agrandarle
    el permiso haría falta el header Service-Worker-Allowed, que en GitHub
    Pages no se puede mandar. */
-const VERSION = "v1";
+const VERSION = "v3";
 
 /* El scope siempre termina en "/", así que sirve de base para resolver rutas
    relativas. Hace que todo funcione igual si la página se publica en la raíz
@@ -39,6 +39,10 @@ const SHELL = [
   "manifest.json",
   "css/estilo.css",
   "js/script.js",
+  "js/sprites.js",
+  "js/audio.js",
+  "js/juegos.js",
+  "js/juegos-lista.js",
   "img/icono-192.png",
   "img/icono-512.png",
   "img/icono-maskable-512.png",
@@ -49,7 +53,7 @@ const SHELL = [
    todas al instalar, sino a medida que se van viendo. */
 const LIMITE_FOTO = 6 * 1024 * 1024;
 
-/* El index.html lleva ?v=2 en el css y el js para que el navegador no se
+/* El index.html lleva ?v= en el css y el js para que el navegador no se
    quede con la versión vieja. Para la caché da igual: se guarda sin ese
    parámetro, así una sola copia sirve para cualquier ?v= que se ponga. */
 function sinVersion(url) {
